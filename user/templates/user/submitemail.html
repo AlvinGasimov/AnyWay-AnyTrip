@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block main %}
+
+    <section>
+        <div class="login-register-container col-lg-4 col-md-6 col-sm-8 col-10">
+            <div class="page-header">
+                <h1 class="">Enter 6-digit code</h1>
+                <div class="lr-text">
+                    <p>Enter the 6-digit number sent to your email.</p>
+                </div>
+            </div>
+
+            <form class="nw-signin" method="POST" action="{% url 'submitemail' %}">
+                {% csrf_token %}
+                <div class="form-data">
+                    <div class="">
+                        <input type="number" name="number" placeholder="XXXXXX" id="number" value="" required>
+                    </div>
+                </div>
+                <button type="submit">
+                    <span>Submit</span>
+                </button>
+            </form>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            $(".phone-mask").mask("(00) 000-00-00");
+
+            $(".phone-mask").on("keydown", function (e) {
+                if (
+                    e.keyCode === 8 ||
+                    e.keyCode === 46 ||
+                    (e.keyCode >= 37 && e.keyCode <= 40) ||
+                    e.keyCode === 9
+                ) {
+                    return;
+                }
+                if (e.key.length === 1 && e.key.match(/[^0-9]/)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools %}
+    {% if page_type == 'subscribe' %}
+        <div>
+            <form method="post" action="{% url 'booking_subscribe_send_email_to_subscribers' %}">
+                {% csrf_token %}
+                <label for="email_subject">Email Subject:</label>
+                <input type="text" name="email_subject" id="email_subject" style="width: 100%; display: block; margin-bottom: 20px;"><br>
+                <label for="email_message">Email Message:</label><br>
+                <textarea name="email_message" id="email_message" rows="5" cols="50" style="width: 100%; display: block; margin-bottom: 20px;"></textarea><br>
+                <input type="submit" value="Send Email">
+            </form>
+        </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}

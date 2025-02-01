@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block main %}
+
+    <section>
+        <div class="login-register-container col-lg-4 col-md-6 col-sm-8 col-10">
+
+            <div class="page-header">
+                <h1 class="">Sign up create an account</h1>
+                <div class="lr-text">
+                    <div>
+                        <p>You can sign up using your
+                            anywayanytrip.com account to access our services.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="nw-signin" method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                <div class="form-data">
+                    <label for="full_name">
+                        <span>Name</span>
+                    </label>
+                    <div>
+                        <input type="text" name="full_name" placeholder="Name" id="full_name" required>
+                    </div>
+                </div>
+
+                <div class="form-data">
+                    <label for="phone">
+                        <span>Phone</span>
+                    </label>
+                    <div class="lr-phone">
+                        <span class="countrycode">+994</span>
+                        <input type="text" class="form-input phone-mask" style="padding-left: 3.3rem;"
+                            placeholder="(_ _) _ _ _-_ _-_ _" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-data">
+                    <label for="email">
+                        <span>Email address</span>
+                    </label>
+                    <div>
+                        <input type="email" name="email" placeholder="Email address" id="email" required>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    <span>Submit</span>
+                </button>
+
+                <div class="have-acc">
+                    <span><a href="{% url 'login' %}">Do you have an account?</a></span>
+                </div>
+
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
+            </form>
+
+
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            $(".phone-mask").mask("(00) 000-00-00");
+
+            $(".phone-mask").on("keydown", function (e) {
+                if (
+                    e.keyCode === 8 ||
+                    e.keyCode === 46 ||
+                    (e.keyCode >= 37 && e.keyCode <= 40) ||
+                    e.keyCode === 9
+                ) {
+                    return;
+                }
+                if (e.key.length === 1 && e.key.match(/[^0-9]/)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

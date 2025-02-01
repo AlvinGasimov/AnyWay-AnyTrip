@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block main %}
+
+    <section>
+        <div class="cart_page_bg mt-5">
+            <div class="container">
+                <div class="shopping_cart_area">
+                    <form action="#">
+                        <div class="row">
+                            <div class="inner-row">
+                                <div class="table_desc">
+                                    <div class="cart_page table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="product_thumb">Şəkil</th>
+                                                    <th class="product_name">Sifariş</th>
+                                                    <th class="product_total">Qiymət</th>
+                                                    <th class="product_quantity">Yerləşmə</th>
+                                                    <th class="product-price">Tarix</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for order in orders %}
+                                                    <tr>
+                                                        <td class="product_thumb">
+                                                            <a href="#">
+                                                                <img src="{{ order.announcement.image.url }}" alt="Sifariş Şəkli">  <!-- Otağa aid şəkli göstəririk -->
+                                                            </a>
+                                                        </td>
+                                                        <td class="product_name">
+                                                            <a href="#">{{ order.name }} {{ order.surname }}</a>  <!-- Sifarişçinin adı və soyadı -->
+                                                        </td>
+                                                        <td class="product_total">
+                                                            {{ order.total_amount }} <span>₼</span>  <!-- Ödəniləcək məbləğ -->
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span>{{ order.room.room_name }}</span>  <!-- Otağın adı -->
+                                                        </td>
+                                                        <td class="product_quantity">
+                                                            <div class="my-quantity my-quantity-card">
+                                                                <span>{{ order.from_date }} - {{ order.to_date }}</span>  <!-- Başlanğıc və bitiş tarixi -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="5">Heç bir sifarişiniz yoxdur.</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

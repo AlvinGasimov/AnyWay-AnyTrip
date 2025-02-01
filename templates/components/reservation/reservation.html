@@ -1,0 +1,302 @@
+{% load i18n %}
+<section>
+    <div class="container">
+        <div class="d-lg-none d-md-block d-sm-block">
+            <div class="looking-for">{% trans "Найти" %}</div>
+            <p>{% trans "Направления, варианты размещения или даже адрес" %}</p>
+        </div>
+
+        <!-- FORM -->
+        <div id="section-main"  class="no-bg mb-lg-5 no-top form-position" aria-label="section-menu">
+            <div class="s002 mt-1">
+                <form method="get" action="{% url "search-result" %}">
+
+                    <!-- Search City -->
+                    <div class="inner-form">
+
+                        <div class="input-field first-wrap position-relative">
+
+                            <div class="icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="city-select-box">
+                                <input id="search" type="text" {% if announcements.form.city.data %}value="{{announcements.form.city.data}}"{% endif %} name="city" placeholder="{% trans "Куда вы хотите?" %}"
+                                    class="js-city-select" />
+                                <button type="button"
+                                    class="city-select-reset js-city-select-reset d-none">X</button>
+                            </div>
+                            <div class="select-dropdown js-select-dropdown custom-scrollbar">
+
+                                <div class="select-dropdown-list">
+
+                                    {% for city in cities %}
+                                    <button class="select-dropdown-btn js-select-dropdown-btn" data-title="{{city.title}}"
+                                        type="button">
+                                        <i class="fa fa-map-marker"></i> {{city.title}}
+                                    </button>
+                                    {% endfor %}
+
+                                    <p class="select-dropdown-not-found js-select-dropdown-not-found">
+                                        {% trans "Uyğun bir şəhər tapılmadı" %}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- area -->
+                        <div class="input-field first-wrap my-dropdown">
+
+                            <div class="icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z">
+                                    </path>
+                                </svg>
+                            </div>
+
+                            <div class="position-relative my-dropdown-toggler" el-to-hide="#outDropdown">
+                                <div class="w-100 btn-input js-date-range-toggler">
+                                    Check-in Date
+                                </div>
+                            </div>
+
+                            <div class="my-dropdown-box my-dropdown-box-large" id="inDropdown">
+
+                                <div class="my-tabs-tab show">
+
+                                    <div class="row gx-0 mx-auto w-100">
+
+                                        <div class="col-12" id="date-range-col">
+                                            <input type="text" name="date-range-in" id="config-demo"
+                                                class="form-control js-date-range-input d-none" value="">
+                                        </div>
+
+                                        
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="input-field first-wrap my-dropdown">
+
+                            <div class="icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z">
+                                    </path>
+                                </svg>
+                            </div>
+
+                            <div class="position-relative my-dropdown-toggler" el-to-hide="#inDropdown">
+                                <!-- <input id="search" type="text" placeholder="2 adults, 2 children, 2 rooms"
+                                    class="js-city-select" /> -->
+                                <div class="w-100 btn-input js-date-range-toggler-2">
+                                    Check-out Date
+                                </div>
+                            </div>
+
+                            <div class="my-dropdown-box my-dropdown-box-large" id="outDropdown">
+
+                                <div class="my-tabs-tab show">
+
+                                    <div class="row gx-0 mx-auto w-100">
+
+                                        <div class="col-12" id="date-range-col-2">
+                                            <input type="text" name="date-range-out" id="config-demo"
+                                                class="form-control js-date-range-input-check-out-date d-none" value="">
+                                        </div>
+
+                                        
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- the-end-of-area -->
+
+
+                        <div class="input-field fouth-wrap my-dropdown" close-on-outer-click>
+
+                            <div class="icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+                                    </path>
+                                </svg>
+                            </div>
+
+
+                            <div class="position-relative my-dropdown-toggler">
+                                <!-- <input id="search" type="text" placeholder="2 adults, 2 children, 2 rooms"
+                                    class="js-city-select" /> -->
+                                    <div class="w-100 btn-input">
+                                        <span class="js-adults-count">{% if request.GET.adults_count %}{{request.GET.adults_count}}{% else %}2{% endif %}</span>, 
+                                        <span class="js-children-count ms-2">{% if request.GET.child_count %}{{request.GET.child_count}}{% else %}2{% endif %}</span>,
+                                        <span class="js-rooms-count ms-2">{% if request.GET.room_count %}{{request.GET.room_count}}{% else %}2{% endif %}</span>
+                                    </div>
+                            </div>
+
+                            <div class="my-dropdown-box">
+
+                                <div class="my-dropdown-list">
+                                    
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        
+                                        <h6 class="fw-bold fs-14px m-0">{% trans "Adults" %}</h6>
+
+                                        <div class="number-input js-number-input" value-field=".js-adults-count">
+
+                                            <button type="button" class="number-input-minus js-number-input-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+
+                                            <input type="text" readonly="true" name="adults_count" value="{% if request.GET.adults_count %}{{request.GET.adults_count}}{% else %}2{% endif %}" max-value="" class="number-input-input js-number-input-input">
+                                            
+                                            <button type="button" class="number-input-plus js-number-input-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="js-number-input-with-additionals" value-field=".js-children-count">
+
+                                        <div class="d-flex align-items-center mt-2 justify-content-between">
+                                            
+                                            <h6 class="fw-bold fs-14px m-0">{% trans "Children" %}</h6>
+
+                                            <div class="number-input">
+
+                                                <button type="button" class="number-input-minus js-number-input-minus">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+
+                                                <input type="text" readonly="true" name="child_count" value="{% if request.GET.child_count %}{{request.GET.child_count}}{% else %}2{% endif %}" max-value="" class="number-input-input js-number-input-input">
+                                                
+                                                <button type="button" class="number-input-plus js-number-input-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div class="row gx-0 mx-auto w-100 justify-content-between js-number-input-additionals-parent">
+                                            {% if request.GET.child_count %}
+                                            {% for i in child_len %}
+                                            <div class="my-col-5 mt-2 js-number-input-additionals-select">
+                                                <select name="children_ages" class="w-100 white-select" value="0">
+                                                    {% for children in children_choises %}
+                                                    <option  value="{{children.id}}">{{children.age}} {% trans "years old" %}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% endfor %}
+                                            {% else %}
+                                            <div class="my-col-5 mt-2 js-number-input-additionals-select">
+                                                <select name="children_ages" class="w-100 white-select" value="0">
+                                                    {% for children in children_choises %}
+                                                    <option value="{{children.id}}">{{children.age}} {% trans "years old" %}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="my-col-5 mt-2 js-number-input-additionals-select">
+                                                <select name="children_ages" class="w-100 white-select" value="0">
+                                                    {% for children in children_choises %}
+                                                    <option value="{{children.id}}">{{children.age}} {% trans "years old" %}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% endif %}
+                                            
+
+                                        </div>
+
+                                        <div class="col-12 mt-2 fs-12px">
+                                            {% trans "To find a place to stay that fits your entire group along with correct prices, we need to know how old your children will be at check-out" %}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex align-items-center mt-2 justify-content-between">
+                                        
+                                        <h6 class="fw-bold fs-14px m-0">{% trans "Rooms" %}</h6>
+
+                                        <div class="number-input js-number-input" value-field=".js-rooms-count">
+
+                                            <button type="button" class="number-input-minus js-number-input-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+
+                                            <input type="text" readonly="true" name="room_count" value="{% if request.GET.room_count %}{{request.GET.room_count}}{% else %}2{% endif %}" max-value="" class="number-input-input js-number-input-input">
+                                            
+                                            <button type="button" class="number-input-plus js-number-input-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <button type="button" class="my-dropdown-closer blue-btn mt-3">
+                                    {% trans "Done" %}
+                                </button>
+
+                            </div>
+
+
+                        </div>
+                        {% comment %} checkboxes {% endcomment %}
+                        <style>
+                            .check-class{
+                                position: absolute;
+                                top:100px;
+                            }
+                            @media screen and (min-width:669px) and (max-width:992px) {
+                            .check-class{
+                                position: absolute;
+                                top: 370px;
+                            }
+                            }
+                            @media screen and (max-width:669px) {
+                            .check-class{
+                                position: unset !important;
+                                {% comment %} top:520px; {% endcomment %}
+                            }
+                            }
+                        </style>
+
+                        <div class="input-field fifth-wrap">
+                            <button class="btn-search" type="submit">{% trans "Найти" %}</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+        
+        
+    </div>
+</section>
+
+<script>
+    var forTravelCheckbox = document.getElementById("check2");
+    if (!forTravelCheckbox.checked) {
+        forTravelCheckbox.value = true;
+    }
+    var forTravelCheckbox1 = document.getElementById("check1");
+    if (!forTravelCheckbox1.checked) {
+        forTravelCheckbox1.value = true;
+    }
+</script>

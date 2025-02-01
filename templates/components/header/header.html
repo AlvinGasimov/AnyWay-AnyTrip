@@ -1,0 +1,341 @@
+{% load static %}
+{% load i18n %}
+<section>
+    <div class="bg-header">
+        <div class="container-md container-sm container-xs">
+
+            <!-- desktop -->
+            <div class="display-block">
+                <div class="row p-header-menu">
+                    <div class="col-2">
+                        <a href="{% url 'home' %}" class="text-white fs-25">
+                            <img src='{{ setting.logo.url }}' alt="Logo" width="252" height="80">
+                        </a>
+                    </div>
+
+                    <div class="col-10">
+                        <div class="d-flex justify-content-end">
+                            
+                            <div class="trip-user">
+                                {% if request.session.user_full_name %}
+                                    <a href="{% url 'account' %}">
+                                        <i class="fa fa-user"></i>
+                                        <span>{{ request.session.user_full_name }}</span> 
+                                    </a>
+                                    <a href="{% url 'logout' %}" class="logout">
+                                        <i class="fa fa-sign-out"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                            
+                            <span>
+                                <div class="dropdown">
+                                    {% if request.LANGUAGE_CODE == 'az' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/country/aze-flag.png' %}" alt="">
+                                    </a>
+                                    {% elif request.LANGUAGE_CODE == 'en' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/_header-img/usa.png' %}" alt="">
+                                    </a>
+                                    {% elif request.LANGUAGE_CODE == 'ru' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/_header-img/ru_flag.png' %}" alt="">
+                                    </a>
+                                    {% endif %}
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'en' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/_header-img/usa.png' %}" alt="">
+
+                                                <div>{% trans "English(US)" %}</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'az' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/country/aze-flag.png' %}" alt="">
+                                                <div>{% trans "Azerbaijani" %}</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'ru' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/_header-img/ru_flag.png' %}" alt="">
+                                                <div>{% trans "Русский" %}</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between d-lg-none">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <a href="{% url 'home' %}" class="text-white fs-25">
+                        <img src='{{ setting.logo.url }}' alt="Logo" width="252" height="80">
+                    </a>
+
+                    <div class="">
+                        <div class="d-flex justify-content-end">
+                            <!-- valyuta -->
+
+                            <!-- languange -->
+
+                            <span>
+                                <div class="dropdown">
+                                    {% if request.LANGUAGE_CODE == 'az' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/country/aze-flag.png' %}" alt="">
+                                    </a>
+                                    {% elif request.LANGUAGE_CODE == 'en' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/_header-img/usa.png' %}" alt="">
+                                    </a>
+                                    {% elif request.LANGUAGE_CODE == 'ru' %}
+                                    <a class="btn" href="#" role="button" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="flag" style="width: 20px; height: 20px;"
+                                            src="{% static './assets/img/_header-img/ru_flag.png' %}" alt="">
+                                    </a>
+                                    {% endif %}
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'en' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/_header-img/usa.png' %}" alt="">
+
+                                                <div>{% trans "English(US)" %}</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'az' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/country/aze-flag.png' %}" alt="">
+                                                <div>{% trans "Azerbaijani" %}</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="me-20">
+                                            <a class="dropdown-item d-flex" href="{% url 'set-language' 'ru' %}">
+                                                <img class="flag me-10" style="width: 20px; height: 20px;"
+                                                    src="{% static './assets/img/_header-img/ru_flag.png' %}" alt="">
+                                                <div>{% trans "Русский" %}</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- menu table -->
+            <div class="menu-table js-menu-table d-none">
+                <div class="close-direction">
+                    <button type="button" class="btn-close menu-table-close js-menu-table-close"
+                        aria-label="Close"></button>
+                </div>
+
+                <div>
+                    <div class="fw700 p-5 fs-25">{% trans "Eще" %}</div>
+
+                    <!-- 1 -->
+                    <ul class="li-block">
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M13.91 24C6.9 24 1.2 18.65 1.2 12.08S6.9 0 13.91 0a13.18 13.18 0 0 1 8.24 2.85 1.2 1.2 0 0 1 .45.85c.029.32-.068.64-.27.89l-2.2 2.64a1.19 1.19 0 0 1-.85.44 1.25 1.25 0 0 1-.89-.29 6.93 6.93 0 0 0-4.48-1.61 6.57 6.57 0 0 0-6.64 6.31 6.42 6.42 0 0 0 6.64 6.15 7 7 0 0 0 3.5-.92V15.4h-2.74c-.68 0-1.23-.55-1.23-1.23v-3c0-.316.122-.62.34-.85a1.31 1.31 0 0 1 .89-.38h6.9a1.24 1.24 0 0 1 1.23 1.23v8.65a1.7 1.7 0 0 1-.62 1.32A13.24 13.24 0 0 1 13.91 24zm0-22.49c-6.17 0-11.2 4.74-11.2 10.57s5 10.41 11.2 10.41A11.76 11.76 0 0 0 21.22 20a.18.18 0 0 0 .07-.15v-8.4H15v2.43h4v4.25l-.33.23a8.47 8.47 0 0 1-4.68 1.39 7.93 7.93 0 0 1-8.15-7.67 8.09 8.09 0 0 1 8.15-7.82 8.45 8.45 0 0 1 5.24 1.79L21 3.85a11.67 11.67 0 0 0-7.09-2.34z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Программа лояльности" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M8.25 19h-3a.75.75 0 0 1-.75-.75v-7.5a.75.75 0 0 0-1.5 0v7.5a2.25 2.25 0 0 0 2.25 2.25h3a.75.75 0 0 0 0-1.5zM1.234 9.823l8.782-7.43a.75.75 0 0 1 .969 0l7.279 6.159a.75.75 0 1 0 .968-1.146l-7.279-6.159a2.25 2.25 0 0 0-2.906 0L.265 8.678a.75.75 0 1 0 .968 1.146zM15.75 2.5h3L18 1.75v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0 0 1.5zm6.75 14.25a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0zm1.5 0a6.75 6.75 0 1 0-13.5 0 6.75 6.75 0 0 0 13.5 0zm-7.5-3v6a.75.75 0 0 0 1.5 0v-6a.75.75 0 0 0-1.5 0zm-2.25 3.75h6a.75.75 0 0 0 0-1.5h-6a.75.75 0 0 0 0 1.5z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Зарегистрировать свой объект" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M18.001 12v8.25a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25V3.75a2.25 2.25 0 0 1 2.25-2.25h7.5a2.25 2.25 0 0 1 2.25 2.25V12zm1.5 0V3.75A3.75 3.75 0 0 0 15.751 0h-7.5a3.75 3.75 0 0 0-3.75 3.75v16.5A3.75 3.75 0 0 0 8.251 24h7.5a3.75 3.75 0 0 0 3.75-3.75V12zm-14.25 7.5h13.5a.75.75 0 0 0 0-1.5h-13.5a.75.75 0 0 0 0 1.5z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Зарегистрировать свой объект" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- 2 -->
+                    <div class="fw700 mb-2 pl-li">{% trans "помощь и поддержка" %}</div>
+                    <ul class="li-block">
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M9.75 9a2.25 2.25 0 1 1 3 2.122 2.25 2.25 0 0 0-1.5 2.122v1.006a.75.75 0 0 0 1.5 0v-1.006c0-.318.2-.602.5-.708A3.75 3.75 0 1 0 8.25 9a.75.75 0 1 0 1.5 0zM12 16.5a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Служба поддержки" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.15 13.603l-5.16.986a.75.75 0 0 0 .28 1.474l5.16-.986a.75.75 0 0 0-.28-1.474zm-5.97-5.837l-3.467 1.146a.4.4 0 0 1-.489-.213.415.415 0 0 1 .187-.547l3.357-1.688a1.594 1.594 0 0 1 1.266-.074l4.973 1.82a.75.75 0 1 0 .516-1.41L15.55 4.983a3.093 3.093 0 0 0-2.457.142L9.735 6.813a1.915 1.915 0 0 0-.872 2.517 1.9 1.9 0 0 0 2.32 1.006L14.65 9.19a.75.75 0 1 0-.47-1.424zM3.686 15.098H6.13l-.56-.25 3.512 3.935a2.09 2.09 0 0 0 2.943.208c.46-.397.725-.975.725-1.583v-.615H12l-.278.696.175.07a2.406 2.406 0 0 0 3.299-2.233h-.75v.75h.489a2.218 2.218 0 0 0 1.774-3.548l-3.148-4.033a.75.75 0 1 0-1.182.922l3.139 4.022a.718.718 0 0 1-.583 1.137h-.489a.75.75 0 0 0-.75.75.904.904 0 0 1-1.242.84l-.176-.07a.75.75 0 0 0-1.028.697v.615a.592.592 0 0 1-1.04.386l-3.52-3.945a.75.75 0 0 0-.56-.251H3.685a.75.75 0 0 0 0 1.5zm7.375-8.452l-.358-.295a2.874 2.874 0 0 0-1.722-.58c-.363 0-.723.07-1.06.205l-4.448 1.78a.75.75 0 0 0 .556 1.392l4.451-1.78a1.35 1.35 0 0 1 1.3.166l.327.27a.75.75 0 0 0 .954-1.158zM.75 7.5h2c.147-.005.245.084.25.2v6.383c-.005.082-.103.172-.22.168L.75 14.25a.75.75 0 0 0 0 1.5h2c.91.038 1.706-.692 1.75-1.633V7.667c-.044-.976-.84-1.705-1.781-1.665L.75 6a.75.75 0 0 0 0 1.5zm22.5 6.75h-2c-.147.005-.245-.085-.25-.201V7.666c.005-.082.103-.171.219-.167l2.031.001a.75.75 0 0 0 0-1.5h-2c-.91-.039-1.706.69-1.75 1.632v6.451c.044.975.84 1.705 1.78 1.666l1.97.001a.75.75 0 0 0 0-1.5zm-10.72 2.013l-.978-.978a.75.75 0 1 0-1.06 1.06l.978.978a.75.75 0 1 0 1.06-1.06zm2.446-1.467l-1.468-1.468a.75.75 0 1 0-1.06 1.06l1.468 1.468a.75.75 0 1 0 1.06-1.06z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Разрешение споров" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- 3 -->
+                    <div class="fw700 mb-2 pl-li">{% trans "вдохновение" %}</div>
+                    <ul class="li-block">
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM8.78 16.28l7.5-7.5a.75.75 0 0 0-1.06-1.06l-7.5 7.5a.75.75 0 1 0 1.06 1.06zM9.75 9a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm1.5 0a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zm4.5 6a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm1.5 0a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Сезонные и праздничные предложения" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" data-rtl-flip="true">
+                                        <path
+                                            d="M21 22.5H5.25a1.5 1.5 0 0 1-1.5-1.5.75.75 0 0 0-1.5 0 3 3 0 0 0 3 3H21a.75.75 0 0 0 0-1.5zM6 0a3.75 3.75 0 0 0-3.75 3.75V21h1.5a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 0 1.5-1.5V1.5a1.5 1.5 0 0 0-1.5-1.5H6zm0 1.5h14.25V18h-15a3 3 0 0 0-3 3c0 1 1.5 1 1.5 0V3.75A2.25 2.25 0 0 1 6 1.5zm14.25 21.75v-4.5a.75.75 0 0 0-1.5 0v4.5a.75.75 0 0 0 1.5 0z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Статьи о путешествиях" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- 4 -->
+                    <div class="fw700 mb-2 pl-li">{% trans "Настройки и юридическая помощь" %}</div>
+                    <ul class="li-block">
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.25 15.75h-.75a.75.75 0 0 1-.75-.75v-3.75a1.5 1.5 0 0 0-1.5-1.5h-.75a.75.75 0 0 0 0 1.5h.75V15a2.25 2.25 0 0 0 2.25 2.25h.75a.75.75 0 0 0 0-1.5zM11.625 6a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "О нашем сайте" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Вакансии" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M1.5 6.75h21a.75.75 0 0 0 0-1.5h-21a.75.75 0 0 0 0 1.5zm1.466 11.474l3.75-12H5.284l3.75 12a.75.75 0 0 0 1.432-.448l-3.75-12c-.22-.701-1.213-.701-1.432 0l-3.75 12a.75.75 0 0 0 1.432.448zM9.75 18a3.75 3.75 0 1 1-7.5 0l-.75.75h9L9.75 18zm1.5 0a.75.75 0 0 0-.75-.75h-9a.75.75 0 0 0-.75.75 5.25 5.25 0 1 0 10.5 0zm3.716.224l3.75-12h-1.432l3.75 12a.75.75 0 0 0 1.432-.448l-3.75-12c-.22-.701-1.213-.701-1.432 0l-3.75 12a.75.75 0 0 0 1.432.448zM21.75 18a3.75 3.75 0 1 1-7.5 0l-.75.75h9l-.75-.75zm1.5 0a.75.75 0 0 0-.75-.75h-9a.75.75 0 0 0-.75.75 5.25 5.25 0 1 0 10.5 0zM12.75 6V1.5a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Юридическая информация" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Правила и условия" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="a-block-list">
+                                <span class="me-1">
+                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" data-rtl-flip="true">
+                                        <path
+                                            d="M22.5 6v14.25a1.5 1.5 0 0 1-3 0V3A2.25 2.25 0 0 0 17.25.75h-15A2.25 2.25 0 0 0 0 3v17.25a3 3 0 0 0 3 3h18a.75.75 0 0 0 0-1.5H3a1.5 1.5 0 0 1-1.5-1.5V3a.75.75 0 0 1 .75-.75h15A.75.75 0 0 1 18 3v17.25a3 3 0 1 0 6 0V6a.75.75 0 0 0-1.5 0zm-18 9.75H15a.75.75 0 0 0 0-1.5H4.5a.75.75 0 0 0 0 1.5zm0 3h6a.75.75 0 0 0 0-1.5h-6a.75.75 0 0 0 0 1.5zm9.75-10.5v2.25h-9V6h9v2.25zm1.5 0V6a1.5 1.5 0 0 0-1.5-1.5h-9A1.5 1.5 0 0 0 3.75 6v4.5a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5V8.25z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span>{% trans "Пресс-центр" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block main %}
+
+    <section>
+        <div class="login-register-container col-lg-4 col-md-6 col-sm-8 col-10">
+            <div class="page-header">
+                <h1 class="">Sign in to your account</h1>
+                <div class="lr-text">
+                    <p>You can sign in using your any way anytrip.com account to access our services.</p>
+                </div>
+            </div>
+
+            <form class="nw-signin" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-data">
+                    <label for="name" class="">
+                        <span> Name</span>
+                    </label>
+                    <div class="">
+                        <input type="name" name="name" placeholder="Name" id="name" value="">
+                    </div>
+                </div>
+
+                <div class="form-data">
+                    <label for="username" class="">
+                        <span>Email address</span>
+                    </label>
+                    <div class="">
+                        <input type="email" name="username" placeholder="Email address" id="username" value="" required>
+                    </div>
+                </div>
+                <button type="submit">
+                    <span>Submit</span>
+                </button>
+
+                <div class="have-acc">
+                    <span><a href="{% url 'register' %}">Do you have not an account?</a></span>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".phone-mask").mask("(00) 000-00-00");
+
+            $(".phone-mask").on("keydown", function (e) {
+                if (
+                    e.keyCode === 8 ||
+                    e.keyCode === 46 ||
+                    (e.keyCode >= 37 && e.keyCode <= 40) ||
+                    e.keyCode === 9
+                ) {
+                    return;
+                }
+                if (e.key.length === 1 && e.key.match(/[^0-9]/)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

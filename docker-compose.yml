@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+  redis:
+    build:
+      context: .
+      dockerfile: redis.dockerfile
+    restart: "always"
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redisdb:/var/lib/redis
+
+  celery:
+    restart: "always"
+    build:
+      context: .
+      dockerfile: celery.dockerfile
+    container_name: celery
+    env_file: .env
+    command: /venv/bin/celery --app=main.celery:app worker -B --loglevel=INFO
+    volumes:
+      - .:/code
+    links:
+      - redis
+    depends_on:
+      - "redis"
+
+  postgres:
+    container_name: postgres-db
+    image: postgres:13-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgdb:/var/lib/postgresql/data
+    env_file: .env
+    environment:
+      - LC_ALL=C.UTF-8
+      - VIRTUAL_HOST=postgres
+      - VIRTUAL_PORT=5432
+
+  web:
+    container_name: Booking
+    build: .
+    restart: "always"
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=139.59.144.39, anywayanytrip.az, www.anywayanytrip.az, 192.168.0.123, localhost
+      - VIRTUAL_PORT=8000
+      - TIMEOUT=300
+      - HTTP_PORT=8000
+      - STATS_PORT=8001
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+      - redis
+    depends_on:
+      - 'postgres'
+      - 'redis'
+
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

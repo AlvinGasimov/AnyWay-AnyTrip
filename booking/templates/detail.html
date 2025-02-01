@@ -1,0 +1,758 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static './assets/css/calendar.css' %}">
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.0.min.js">
+    <link rel="stylesheet" href="{% static './slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static './slick/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/daterangepicker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static './font_awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/product.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/fancybox.min.css' %}" />
+{% endblock head %}
+{% block main %}
+    <!-- mobile-top-slider -->
+    <div class="simple-slick-slider-container position-relative d-lg-none mt-5">
+
+        <div class="fw700">
+            <h5 class="px-2 mx-1">{{announcement.title}}</h5>
+
+            <p class="px-2 fs-14px">
+                <i class="fa fa-map-marker text-info fa-1x me-1"></i>
+                {{announcement.street}}, {{announcement.city}}
+            </p>
+        </div>
+
+        <div class="simple-slick-slider-index slider-index-box">1/{{announcement.announcement_images.count}}</div>
+
+        <div class="simple-slick-slider slick-no-spacing slider-arrows-2">
+            {% for image in announcement.announcement_images.all %}
+            <div class="my-img-size-7">
+                <img src="{{image.image.url}}" class="my-img-size-4" alt="Image 1">
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="px-4 d-lg-none">
+        {% for i in announcement.prices.all %}
+            <p class="mt-4 d-flex align-items-center">
+                <i class="fa fa-money fa-2x me-2"></i>
+                <span>{{ i.day }} {% trans "Gün" %}-{% trans "Price" %}: {{i.price|floatformat:-2}} {% trans "AZN" %} {% trans "Böyüklər üçün" %}</span>
+            </p>
+
+            <p class="mt-4 d-flex align-items-center">
+                <i class="fa fa-money fa-2x me-2"></i>
+                <span>{{ i.day }} {% trans "Gün" %}-{% trans "Price" %}: {{i.child_price|floatformat:-2}} {% trans "AZN" %} {% trans "Kiçiklər üçün" %}</span>
+            </p>
+        {% endfor %}
+
+        <p class="mt-4">
+            {{announcement.description|safe}}
+        </p>
+        {% if announcement.popular_filters %}
+        <div class="d-flex flex-wrap mt-4">
+
+            <h5 class="w-100">{% trans "Özəlliklər" %}</h5>
+            
+            {% for filter in announcement.popular_filters.all %}
+                <p class="me-4">{{filter.title}}</p>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+        
+        <button class="btn btn-primary btn-reserve my-modal-toggler" target="#myFormModal">
+            {% trans "Rezerv et" %}
+        </button>
+        
+    </div>
+
+    
+    
+    <!-- the-end-of-mobile-top-slider -->
+
+    <!-- PRESENTATION IMG SECTION -->
+    <section>
+        <div class="mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <div class="d-flex flex-column">
+
+                            <div class="search-details">
+                                <h5>{% trans "Найти" %}</h5>
+                            </div>
+                            <div class="d-lg-none d-md-block d-sm-block">
+                                <div class="looking-for">{% trans "Найти" %}</div>
+                                <p>{% trans "Направления, варианты размещения или даже адрес" %}</p>
+                            </div>
+            
+                            <!-- FORM -->
+                            <div id="section-main" class="no-bg no-top form-position-details" style="position: relative;" aria-label="section-menu">
+                                <div class="s002 s003-det mt-1" >
+                                    <form  action="{% url 'search-result' %}" method="get">
+            
+                                        
+                                        <div class="inner-form d-flex flex-column">
+            
+                                            <!-- Search City -->
+                                            <div class="col-12 input-field first-wrap position-relative mb-1">
+            
+                                                <div class="icon-wrap">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+            
+                                                <div class="city-select-box">
+                                                    <input id="search" type="text" name="city" placeholder="{% trans "Куда вы хотите?" %}"
+                                                        class="js-city-select" />
+                                                    <button type="button"
+                                                        class="city-select-reset js-city-select-reset d-none">{% trans "X" %}</button>
+                                                </div>
+            
+                                                <div class="select-dropdown js-select-dropdown custom-scrollbar">
+            
+                                                    <div class="select-dropdown-list">
+                                                        {% for city in cities %}
+                                                        <button class="select-dropdown-btn js-select-dropdown-btn" data-title="{{city.title}}"
+                                                            type="button">
+                                                            <i class="fa fa-map-marker"></i> {{city.title}}
+                                                        </button>
+                                                        {% endfor %}
+            
+                                                        <p class="select-dropdown-not-found js-select-dropdown-not-found">
+                                                            {% trans "Uyğun bir şəhər tapılmadı" %}
+                                                        </p>
+            
+                                                    </div>
+            
+                                                </div>
+            
+                                            </div>
+                                            
+                                            <div class="col-12 input-field first-wrap my-dropdown mb-1">
+            
+                                                <div class="icon-wrap">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+            
+                                                <div class="position-relative my-dropdown-toggler" el-to-hide="#outDropdown">
+                                                        <div class="w-100 btn-input js-date-range-toggler">
+                                                            CHECK IN
+                                                        </div>
+                                                </div>
+            
+                                                <div class="my-dropdown-box my-dropdown-box-large" id="inDropdown">
+            
+                                                    <div class="my-dropdown-list">
+                                                        
+                                                        <div class="my-tabs mt-0">
+            
+                                                            <div class="my-tabs-content">
+                                            
+                                                                <div class="my-tabs-tab show">
+            
+                                                                    <div class="row gx-0 mx-auto w-100">
+            
+                                                                        <div class="col-12" id="date-range-col">
+                                                                            <input type="text" name="date-range-in" id="config-demo" class="form-control js-date-range-input d-none">
+                                                                        </div>
+            
+                                                                    </div>
+            
+                                                                </div>
+            
+                                                            </div>
+            
+                                                        </div>
+            
+                                                    </div>
+            
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 input-field first-wrap my-dropdown mb-1">
+            
+                                                <div class="icon-wrap">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+            
+                                                <div class="position-relative my-dropdown-toggler" el-to-hide="#inDropdown">
+                                                        <div class="w-100 btn-input js-date-range-toggler-2">
+                                                            CHECK OUT
+                                                        </div>
+                                                </div>
+            
+                                                <div class="my-dropdown-box my-dropdown-box-large" id="outDropdown">
+            
+                                                    <div class="my-dropdown-list">
+                                                        
+                                                        <div class="my-tabs mt-0">
+            
+                                                            <div class="my-tabs-content">
+                                            
+                                                                <div class="my-tabs-tab show">
+            
+                                                                    <div class="row gx-0 mx-auto w-100">
+            
+                                                                        <div class="col-12" id="date-range-col-2">
+                                                                            <input type="text" name="date-range-out" id="config-demo" class="form-control js-date-range-input-check-out-date d-none">
+                                                                        </div>
+            
+                                                                    </div>
+            
+                                                                </div>
+            
+                                                            </div>
+            
+                                                        </div>
+            
+                                                    </div>
+            
+                                                </div>
+                                            </div>
+                                            <!-- the-end-of-area -->
+            
+                                            <!-- people -->
+                                            <div class="col-12 input-field my-dropdown mb-1" close-on-outer-click>
+            
+                                                <div class="icon-wrap">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+            
+            
+                                                <div class="position-relative my-dropdown-toggler">
+                                                        <div class="w-100 btn-input">
+                                                            <span class="js-adults-count">2</span>, 
+                                                            <span class="js-children-count ms-2">2</span>,
+                                                            <span class="js-rooms-count ms-2">2</span>
+                                                        </div>
+                                                </div>
+            
+                                                <div class="my-dropdown-box">
+            
+                                                    <div class="my-dropdown-list">
+                                                        
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            
+                                                            <h6 class="fw-bold fs-14px m-0">{% trans "Adults" %}</h6>
+            
+                                                            <div class="number-input js-number-input" value-field=".js-adults-count">
+            
+                                                                <button type="button" class="number-input-minus js-number-input-minus">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+            
+                                                                <input type="text" readonly="true" name="adults_count" value="2" max-value="" class="number-input-input js-number-input-input">
+                                                                
+                                                                <button type="button" class="number-input-plus js-number-input-plus">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            
+                                                            </div>
+                                                            
+                                                        </div>
+            
+                                                        <div class="js-number-input-with-additionals" value-field=".js-children-count">
+            
+                                                            <div class="d-flex align-items-center mt-2 justify-content-between">
+                                                                
+                                                                <h6 class="fw-bold fs-14px m-0">{% trans "Children" %}</h6>
+            
+                                                                <div class="number-input">
+            
+                                                                    <button type="button" class="number-input-minus js-number-input-minus">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+            
+                                                                    <input type="text" readonly="true" name="child_count" value="2" max-value="" class="number-input-input js-number-input-input">
+                                                                    
+                                                                    <button type="button" class="number-input-plus js-number-input-plus">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                
+                                                                </div>
+                                                                
+                                                            </div>
+            
+                                                            <div class="row gx-0 mx-auto w-100 justify-content-between js-number-input-additionals-parent">
+                                                                
+                                                                <div class="my-col-5 mt-2 js-number-input-additionals-select">
+                    
+                                                                    <select name="children_ages" class="w-100 white-select" value="0">
+                                                                        {% for children in children_choises %}
+                                                                        <option  value="{{children.id}}">{{children.age}} {% trans "years old" %}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                    
+                                                                </div>
+                    
+                                                                <div class="my-col-5 mt-2 js-number-input-additionals-select">
+                    
+                                                                    <select name="children_ages" class="w-100 white-select" value="0">
+                                                                        {% for children in children_choises %}
+                                                                        <option  value="{{children.id}}">{{children.age}} {% trans "years old" %}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    
+                                                                </div>
+                    
+                                                            </div>
+            
+                                                            <div class="col-12 mt-2 fs-12px">
+                                                                {% trans "To find a place to stay that fits your entire group along with correct prices, we need to know how old your children will be at check-out" %}
+                                                            </div>
+            
+                                                        </div>
+            
+                                                        <div class="d-flex align-items-center mt-2 justify-content-between">
+                                                            
+                                                            <h6 class="fw-bold fs-14px m-0">{% trans "Rooms" %}</h6>
+            
+                                                            <div class="number-input js-number-input" value-field=".js-rooms-count">
+            
+                                                                <button type="button" class="number-input-minus js-number-input-minus">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+            
+                                                                <input type="text" readonly="true" name="room_count" value="2" max-value="" class="number-input-input js-number-input-input">
+                                                                
+                                                                <button type="button" class="number-input-plus js-number-input-plus">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            
+                                                            </div>
+                                                            
+                                                        </div>
+            
+                                                    </div>
+            
+                                                    <button type="button" class="my-dropdown-closer blue-btn mt-3">
+                                                        {% trans "Done" %}
+                                                    </button>
+            
+                                                </div>
+            
+            
+                                            </div>
+                                            <!-- CHECK -->
+                                            <style>
+                                                .check-class{
+                                                    position: absolute;
+                                                    bottom:-100px;
+                                                    left: 0px;
+                                                }
+                                                
+                                            </style>
+            
+                                            <!-- button -->
+                                            <div class="col-12 input-field fifth-wrap col-12 w-100">
+                                                <button class="btn-search" type="submit">{% trans "Найти" %}</button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+            
+                            
+                        </div> 
+                    </div>
+                </div>
+
+                <!-- IMG CONT -->
+                <div class="col-9 d-none d-lg-block">
+
+                    <div class="fw700">
+                        
+                        <h5>{{announcement.title}}</h5>
+
+                        <p>
+                            <i class="fa fa-map-marker text-info fa-2x me-2"></i>
+                            {{announcement.street}}, {{announcement.city}}
+                        </p>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="w-35 me-3">
+                           
+                            <div>
+                                <img src="{{announcement.announcement_images.all.0.image.url}}" class="left-img " alt="">
+                            </div>
+                           
+                            <div class="mt-10">
+                                <img src="{{announcement.announcement_images.all.1.image.url}}" class="left-img " alt="">
+                            </div>
+                           
+                        </div>
+                        
+                        <div class="w-65">
+                            <img src="{{announcement.announcement_images.all.2.image.url}}" class="right-big-img" alt="">
+                        </div>
+                       
+                    </div>
+
+                    <div class="d-flex mt-3">
+                        {% for image in announcement.announcement_images.all %}
+                        {% if forloop.counter == 4 or forloop.counter == 5 or forloop.counter == 6 %}
+                            <div class="w-25 me-3">
+                                <img src="{{image.image.url}}" class="under-img" alt="">
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% if announcement.announcement_images.count > 6 %}
+                        <div class="w-25 my-modal-toggler cursor-pointer d-none d-lg-block position-relative" target="#myModal">
+                            <div class="position-absolute bg-opacitied-black top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                <span class="p-2 text-white fw-bold">+ {{announcement.announcement_images.count|add:-6}} {% trans "Photos" %}</span>
+                            </div>
+                            <img src="{{announcement.announcement_images.all.6.image.url}}" class="under-img" alt="">
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="">
+                        {% for i in announcement.pricesfilter.all %}
+                            <p class="mt-4 d-flex align-items-center">
+                                <i class="fa fa-money fa-2x me-2"></i>
+                                <span>{{ i.day }} {% trans "Qiyməti" %}: {{i.price|floatformat:-2}} {% trans "AZN" %}</span>
+                            </p>
+                        {% endfor %}
+
+                        {% for i in announcement.prices.all %}
+                            {% if i.price_is_active %}
+                                <p class="mt-4 d-flex align-items-center">
+                                    <i class="fa fa-money fa-2x me-2"></i>
+                                    <span>{{ i.day }} {% trans "Gün" %}-{% trans "Price" %}: {{i.price|floatformat:-2}} {% trans "AZN" %} {% trans "Böyüklər üçün" %}</span>
+                                </p>
+                            {% endif %}
+
+                            {% if i.child_price_is_active %}
+                                <p class="mt-4 d-flex align-items-center">
+                                    <i class="fa fa-money fa-2x me-2"></i>
+                                    <span>{{ i.day }} {% trans "Gün" %}-{% trans "Price" %}: {{i.child_price|floatformat:-2}} {% trans "AZN" %} {% trans "Kiçiklər üçün" %}</span>
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+
+                        <p class="mt-4">
+                            {{announcement.description|safe}}
+                        </p>
+
+                        {% if announcement.popular_filters %}
+                        <div class="d-flex flex-wrap mt-4">
+                            <h5 class="w-100">{% trans "Özəlliklər" %}</h5>
+                            {% for service in announcement.services.all %}
+                            <p class="me-4">{{service.title}}</p>
+                            {% endfor %}
+
+                            {% comment %} <h5 class="w-100">{% trans "Populyar axtarışlar" %}</h5>
+                            {% for filter in announcement.popular_filters.all %}
+                            <p class="me-4">{{filter.title}}</p>
+                            {% endfor %} {% endcomment %}
+                            
+                        </div>
+                        {% endif %}
+
+                        <h5 class="w-100">{% trans "Transferlər" %}</h5>
+                        <p class="me-4">{% trans 'Ünvan' %} - {{announcement.transfer.address}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="map mt-5 pt-2 mb-8 container-lg">
+        <iframe src="{{ announcement.map_url }}" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border: 0px; width: 100%;"></iframe>
+    </div>
+
+    <!-- Apartment SEARCH SLIDER -->
+    <section class="pt-5 pt-lg-0">
+        <div class="container-lg pt-5 pt-lg-0 mt-5">
+            <div>
+                <h4>{% trans "Азербайджан — откройте для себя эту страну" %}</h4>
+                <p>{% trans "В этих популярных местах вы точно найдете что-то для себя" %}.</p>
+            </div>
+
+            <div class="my-slick-arrow-red">
+                <div class="slick-container sl-details">
+                    {% for similar_announcement in similar_announcements %}
+                    <a href="{{similar_announcement.get_absolute_url}}" class="text-dark shadow">
+                        <div class="sl-slider">
+                            <div>
+                                <img src="{{similar_announcement.image.url}}" alt="slider pictures 1" class="sl-img-details">
+                            </div>
+                    
+                            <div class="p-1">
+                                <div class="slick-title">{{similar_announcement.title}}</div>
+                                <div class=" d-flex">
+                                    <div class="d-flex align-items-center">
+                                        <svg style="width: 15px; height: 15px; fill: gray" width="12" viewBox="0 0 24 24" class="bk-icon -streamline-geo_pin"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="m-0">{{similar_announcement.distance_from_center|floatformat:-2}} {% trans "км от центра" %}</p>
+                                    </div>
+                                </div>
+                                {% if similar_announcement.is_travel_sustainable_property %}
+                                <div class=" d-flex">
+                                    <div>
+                                        <svg height="12" width="12" viewBox="0 0 24 24" class="bk-icon -streamline-travel_sustainable me-1"><path d="M21.22 3.37a.75.75 0 0 0-.6-.59c-4.85-.9-10.6.55-13.37 3.36S3.1 14.39 3.88 19.05L2 21a.75.75 0 0 0 0 1 .74.74 0 0 0 .53.22A.71.71 0 0 0 3 22l2-1.9a16.94 16.94 0 0 0 2.76.23c4.09 0 8.19-1.33 10.35-3.52 2.71-2.81 4.07-8.59 3.11-13.44zM17 15.75c-2.11 2.14-6.59 3.36-10.7 3L16.59 8.47a.75.75 0 0 0 0 -1.06.77.77 0 0 0-1.07 0l-10.3 10.3c-.33-3.91.91-8.31 3.1-10.52s7.29-3.63 11.52-3c.67 4.22-.54 9.22-2.84 11.56z"></path></svg>
+                                    </div>
+                                    
+                                    <div>
+                                        <p class="m-0">{% trans "Жилье для осознанных путешествий" %}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main %}
+{% block js %}
+
+    <!-- modal -->
+    <div class="d-none d-lg-block">
+
+        <div class="my-modal" id="myModal" style="overflow: scroll;" >
+
+            <div class="my-modal-content">
+
+                <button type="button" class="my-modal-closer">
+                    <i class="fa fa-times"></i>
+                </button>
+
+                <div >
+
+                    <div class="thumbnails d-flex justify-content-between flex-wrap" >
+                        {% for image in announcement.announcement_images.all %}
+                        <div class="my-img-size-6 grow-img-on-hover">
+                            <img class="fancybox" data-fancybox="gallery" data-caption="Image {{image.id}}"
+                                data-thumb="{{image.image.url}}" src="{{image.image.url}}"
+                                data-src="{{image.image.url}}" alt="Image 1">
+                        </div>
+                        {% endfor %}
+                        <!-- dont-remove-this-empty-elements -->
+                        <div class="my-img-size-6 h-0"></div>
+                        <div class="my-img-size-6 h-0"></div>
+                        <div class="my-img-size-6 h-0"></div>
+                        <!-- dont-remove-this-empty-elements -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- the-end-of-modal -->
+
+    <!-- modal -->
+    <div class="">
+
+        <div class="my-modal" ignore-bg id="myFormModal">
+
+            <div class="my-modal-content">
+
+                <button type="button" class="my-modal-closer">
+                    <i class="fa fa-times"></i>
+                </button>
+
+                <div>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row gx-0 mx-auto w-100 justify-content-between">
+                        <input type="hidden" required="" class="form-control api-inputs" name="announcement" id="announcement" value="{{ announcement.id }}" aria-describedby="emailHelp">
+
+                        <div class="col-12 col-lg-6 pe-lg-3 mb-3">
+                          <label for="name" class="form-label">{% trans "Ad" %}</label>
+                          <input type="text" required="" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="col-12 col-lg-6 ps-lg-3 mb-3">
+                            <label for="surname" class="form-label">{% trans "Soyad" %}</label>
+                            <input type="text" required="" class="form-control" name="surname" id="surname" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="col-12 col-lg-6 pe-lg-3 mb-3">
+                            <label for="email" class="form-label">{% trans "Email" %}</label>
+                            <input type="email" required="" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                        </div>
+  
+                        <div class="col-12 col-lg-6 ps-lg-3 mb-3">
+                            <label for="phoneNumber" class="form-label">{% trans "Əlaqə Nömrəsi" %}</label>
+                            <input type="number" required="" class="form-control" name="phone_number" id="phoneNumber" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="col-12 col-lg-6 pe-lg-3 mb-3">
+                            <label for="childrenNumber" class="form-label">{% trans "Kiçik şəxslərin sayı" %}</label>
+                            <input type="number" required="" class="form-control api-inputs" name="children_number" id="childrenNumber" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="col-12 col-lg-6 ps-lg-3 mb-3">
+                            <label for="adultNumber" class="form-label">{% trans "Böyük şəxslərin sayı" %}</label>
+                            <input type="number" required="" class="form-control api-inputs" name="adult_number" id="adultNumber" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="col-12 col-lg-6 pe-lg-3 mb-3">
+                            <label for="roomType" class="form-label">{% trans "Otağın növünü seçin" %}</label>
+                            <select class="form-select" aria-label="Default select example" id="roomType"
+                                name="room_type">
+                                {% for i in room_type %}
+                                    {% if forloop.first %}
+                                        <option selected value="{{ i.id }}">{{ i.room_type }}</option>
+                                    {% else %}
+                                        <option value="{{ i.id }}">{{ i.room_type }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <p class="mt-2 mb-1 text-start">
+                            {% trans "Seçilmiş Tarix" %}:
+                            <span class="js-date-range-toggler-3"></span>
+                            -
+                            <span class="js-date-range-toggler-4"></span>
+                        </p>
+                        
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                            <div class="col-12 col-lg-6 col-md-6 d-flex" id="date-range-col-3">
+                                <input type="text" name="check-in-date" id="config-demo" class="form-control js-date-range-input-3 d-none api-inputs">
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-md-6 d-flex " id="date-range-col-4">
+                                <input type="text" name="check-out-date" id="config-demo" class="form-control js-date-range-input-4 d-none api-inputs">
+                            </div>
+
+                        </div>
+                        <!-- hier-kopieren -->
+
+                        <div class="text-start">
+                            <label class="form-label text-start mt-3">{% trans "Bizə mesajınız" %}</label>
+                            <textarea id="" cols="30" rows="7" class="form-control my_message"
+                                name="order_message"></textarea>
+                        </div>
+
+                        <div class="form-text mt-3">{% trans "Qiymət" %}: <span id="reserve-price"></span></div>
+
+                        <div class="form-text mt-3">{{ setting.reserve_info }}</div>
+
+                        <label class="agree-control">
+                            <input type="checkbox" checked name="agree" value="terms" id="ruleCheckbox">
+                            <a href="{% url 'rules' %}" target="_blank" class="rules_link">{% trans "Şərtlərlə razıyam" %} </a>
+                        </label>
+
+                        <button type="submit" id="submitBtn" class="btn modal-submit btn-reserve col-lg-6 btn-primary">{% trans "Göndər" %}</button>
+                        
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- the-end-of-modal -->
+
+
+    <script>
+        var forTravelCheckbox = document.getElementById("check2");
+        if (!forTravelCheckbox.checked) {
+            forTravelCheckbox.value = true;
+        }
+        var forTravelCheckbox1 = document.getElementById("check1");
+        if (!forTravelCheckbox1.checked) {
+            forTravelCheckbox1.value = true;
+        }
+
+        var rulesCheckbox = document.getElementById("ruleCheckbox");
+        var submitBtn = document.getElementById("submitBtn");
+        rulesCheckbox.addEventListener('change', ()=>{
+            if (ruleCheckbox.checked) {
+                submitBtn.removeAttribute("disabled")
+            }else{
+                submitBtn.setAttribute("disabled", '')
+            }
+        })
+    </script>
+
+<script src="{% static './js/jquery.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="{% static './js/jquery-migrate.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static './js/calendar/choices.js' %}"></script>
+<script src="{% static './js/calendar/flatpickr.js' %}"></script>
+<script src="{% static './js/calendar/main.js' %}"></script>
+<script src="{% static './slick/slick.js' %}"></script>
+<script src="{% static './slick/slick.min.js' %}"></script>
+<script src="{% static './js/det-slider.js' %}"></script>
+<script src="{% static './js/slick-aze.js' %}"></script>
+<script src="{% static './js/slick-search.js' %}"></script>
+<script src="{% static './js/slick-room.js' %}"></script>
+<script src="{% static './js/sliders.js' %}"></script>
+<script src="{% static './js/tabs-slider.js' %}"></script>
+
+<script type="text/javascript" src="{% static './js/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static './js/daterangepicker.js' %}"></script>
+<script type="text/javascript" src="{% static './js/range-data-picker.js' %}"></script>
+
+<script src="{% static './js/style.js' %}"></script>
+
+<script src="{% static './js/fancybox.min.js' %}"></script>
+
+<script>
+    // Initialize Fancybox
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            buttons: [
+                // "zoom",    // Zoom button
+                "slideShow", // Slide show button
+                "fullScreen", // Full screen button
+                "download", // Download button
+                "thumbs",  // Thumbnails button
+                "close"    // Close button
+            ],
+            loop: true,
+            infobar: true,
+            thumbs: {
+                autoStart: true, // Display thumbnails by default
+                hideOnClose: true, // Hide thumbnails when the modal is closed,
+            },
+        });
+    });
+
+</script>
+{% endblock js %}

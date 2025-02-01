@@ -1,0 +1,126 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{setting.site_name}}</title>
+    <link rel="icon" type="image/x-icon" href="{% if setting.fav_icon %}{{setting.fav_icon.url}}{% endif %}">
+    {% block head %}
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static './assets/css/calendar.css' %}">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.0.min.js"> -->
+    <link rel="stylesheet" href="{% static './slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static './slick/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/daterangepicker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static './font_awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static "./assets/css/product.css" %}"/>
+    <link rel="stylesheet" href="{% static "./assets/css/fancybox.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "./assets/css/details.css" %}">
+
+    {% endblock head %}
+</head>
+
+<body class="bg-d9d9d9">
+    <!-- Header Section -->
+    {% block header %}
+        {% include 'components/header/header.html' %}
+    {% endblock header %}
+    <!-- Header Section End-->
+    
+    <!-- Booking button section -->
+    {% block booking %}
+        {% include 'components/booking/booking.html' %}
+    {% endblock booking %}
+    <!-- Booking button section end-->
+    
+
+    {% block main %}{% endblock main %}
+
+    <!-- Subscribe section -->
+    <section>
+        <div class="bg-subscribe d-lg-block mt-5">
+
+            <div class="container d-flex justify-content-between align-items-center">
+           
+            <div class="footer-links w-100-on-mobile ">
+                <div class="container">
+
+
+                    <div
+                        class="d-flex flex-column flex-lg-row align-items-center text-center text-lg-start justify-content-start mt-3 li-text-size">
+                        <ul class="column-2 p-0">
+                            {% for city in cities %}
+                                <li><a href="{% url 'search-result'%}?city={{city.title}}">{{ city.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-none d-lg-block">
+                <div class="sub-padding">
+                    <form method='post' action="{% url 'subscribe' %}" class="row justify-content-end">
+                        {% csrf_token %}
+
+                        <div class="d-flex flex-wrap justify-content-end">
+                            <div class="sub-title text-end w-100">
+                                <h4>{% trans "Сэкономьте время и деньги" %}</h4>
+                                <p>{% trans "Подпишитесь, и мы вышлем вам лучшие предложения" %}</p>
+                            </div>
+                            <div class="d-flex">
+                                <input type="email" name ="email" class="form-control input-style me-1"
+                                    placeholder="{% trans "Ваш электронный адрес" %}" id="validationCustom03" required>
+                                <div class="invalid-feedback text-danger">{% trans "Пожалуйста заполните поле." %}</div>
+                                <button type="submit" class="btn custom-btn text-white">{% trans "Подписаться" %}</button>
+                            </div>                         
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+   
+    <!-- License -->
+    <section>
+        <div class="container mt-2 text-center">
+            <div class="fs13 p-3">{% trans "Copyright" %} © 1996–2025 {{setting.site_name}}™. {% trans "Все права защищены" %}.</div>
+        </div>
+    </section>
+
+    {% block js %}
+    <script src="{% static './js/jquery.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="{% static './js/jquery-migrate.js' %}"></script>
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js' %}"></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+    <script src="{% static './js/calendar/choices.js' %}"></script>
+    <script src="{% static './js/calendar/flatpickr.js' %}"></script>
+    <script src="{% static './js/calendar/main.js' %}"></script>
+    <script src="{% static './slick/slick.js' %}"></script>
+    <script src="{% static './slick/slick.min.js' %}"></script>
+    <script src="{% static './js/slick-aze.js' %}"></script>
+    <script src="{% static './js/slick-search.js' %}"></script>
+    <script src="{% static './js/slick-room.js' %}"></script>
+    <script src="{% static './js/sliders.js' %}"></script>
+    <script src="{% static './js/tabs-slider.js' %}"></script>
+    <script type="text/javascript" src="{% static './js/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static './js/daterangepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static './js/range-data-picker.js' %}"></script>
+    <script src="{% static './js/style.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>

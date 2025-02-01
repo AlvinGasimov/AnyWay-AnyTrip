@@ -1,0 +1,535 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-10 16:48+0400\n"
+"PO-Revision-Date: 2023-07-28 20:13+0319\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.6\n"
+
+#: booking/filters.py:31
+msgid "Distance from city center"
+msgstr "Distance from city center"
+
+#: booking/filters.py:32
+msgid "Rating"
+msgstr "Rating"
+
+#: booking/filters.py:33
+msgid "Rating descending"
+msgstr "Rating descending"
+
+#: booking/filters.py:34
+msgid "First houses or apartments"
+msgstr "First houses or apartments"
+
+#: booking/models.py:9
+msgid "Unrated"
+msgstr "Unrated"
+
+#: booking/models.py:10
+msgid "3 Stars"
+msgstr "3 Stars"
+
+#: booking/models.py:11
+msgid "4 Stars"
+msgstr "4 Stars"
+
+#: booking/models.py:12
+msgid "5 Stars"
+msgstr "5 Stars"
+
+#: booking/models.py:17
+msgid "January"
+msgstr "January"
+
+#: booking/models.py:18
+msgid "February"
+msgstr "February"
+
+#: booking/models.py:19
+msgid "March"
+msgstr "March"
+
+#: booking/models.py:20
+msgid "April"
+msgstr "April"
+
+#: booking/models.py:21
+msgid "May"
+msgstr "May"
+
+#: booking/models.py:22
+msgid "June"
+msgstr "June"
+
+#: booking/models.py:23
+msgid "July"
+msgstr "July"
+
+#: booking/models.py:24
+msgid "August"
+msgstr "August"
+
+#: booking/models.py:25
+msgid "September"
+msgstr "September"
+
+#: booking/models.py:26
+msgid "October"
+msgstr "October"
+
+#: booking/models.py:27
+msgid "November"
+msgstr "November"
+
+#: booking/models.py:28
+msgid "December"
+msgstr "December"
+
+#: booking/models.py:32 booking/templates/detail.html:265
+msgid "Week"
+msgstr "Week"
+
+#: booking/models.py:33 booking/templates/detail.html:260
+msgid "Weekend"
+msgstr "Weekend"
+
+#: booking/models.py:34 booking/templates/detail.html:270
+msgid "Custom"
+msgstr "Custom"
+
+#: booking/models.py:38
+msgid "Monday"
+msgstr "Monday"
+
+#: booking/models.py:39
+msgid "Tuesday"
+msgstr "Tuesday"
+
+#: booking/models.py:40
+msgid "Wednesday"
+msgstr "Wednesday"
+
+#: booking/models.py:41
+msgid "Thursday"
+msgstr "Thursday"
+
+#: booking/models.py:42
+msgid "Friday"
+msgstr "Friday"
+
+#: booking/models.py:43
+msgid "Saturday"
+msgstr "Saturday"
+
+#: booking/models.py:44
+msgid "Sunday"
+msgstr "Sunday"
+
+#: booking/templates/detail.html:48 booking/templates/index.html:307
+#: booking/templates/search_result.html:223
+msgid "AZN"
+msgstr "AZN"
+
+#: booking/templates/detail.html:57 booking/templates/detail.html:573
+msgid "Özəlliklər"
+msgstr "Properties"
+
+#: booking/templates/detail.html:78 booking/templates/detail.html:81
+#: booking/templates/detail.html:499
+#: templates/components/reservation/reservation.html:5
+#: templates/components/reservation/reservation.html:463
+msgid "Найти"
+msgstr "Find"
+
+#: booking/templates/detail.html:82
+#: templates/components/reservation/reservation.html:6
+msgid "Направления, варианты размещения или даже адрес"
+msgstr "Directions, accommodation options or even an address"
+
+#: booking/templates/detail.html:105
+#: templates/components/reservation/reservation.html:27
+msgid "Куда вы хотите?"
+msgstr "Where do you want to go?"
+
+#: booking/templates/detail.html:108
+msgid "X"
+msgstr "X"
+
+#: booking/templates/detail.html:122
+#: templates/components/reservation/reservation.html:44
+msgid "Uyğun bir şəhər tapılmadı"
+msgstr "No matching city found"
+
+#: booking/templates/detail.html:144
+msgid "CHECK IN - CHECK OUT"
+msgstr "CHECK IN - CHECK OUT"
+
+#: booking/templates/detail.html:158
+#: templates/components/reservation/reservation.html:99
+msgid "Calendar"
+msgstr "Calendar"
+
+#: booking/templates/detail.html:164
+#: templates/components/reservation/reservation.html:105
+msgid "I am flexible"
+msgstr "I am flexible"
+
+#: booking/templates/detail.html:189 booking/templates/detail.html:255
+#: templates/components/reservation/reservation.html:130
+msgid "None"
+msgstr "None"
+
+#: booking/templates/detail.html:200
+#: templates/components/reservation/reservation.html:141
+msgid "day"
+msgstr "day"
+
+#: booking/templates/detail.html:211 booking/templates/detail.html:222
+#: booking/templates/detail.html:233
+#: templates/components/reservation/reservation.html:152
+#: templates/components/reservation/reservation.html:163
+#: templates/components/reservation/reservation.html:174
+msgid "days"
+msgstr "days"
+
+#: booking/templates/detail.html:249
+#: templates/components/reservation/reservation.html:190
+msgid "Preferred nights"
+msgstr "Preferred nights"
+
+#: booking/templates/detail.html:277
+#: templates/components/reservation/reservation.html:209
+msgid "Select duration and check-in date"
+msgstr "Select duration and check-in date"
+
+#: booking/templates/detail.html:279
+#: templates/components/reservation/reservation.html:211
+msgid "Night"
+msgstr "Night"
+
+#: booking/templates/detail.html:313
+#: templates/components/reservation/reservation.html:245
+msgid "Preferred months"
+msgstr "Preferred months"
+
+#: booking/templates/detail.html:329
+#: templates/components/reservation/reservation.html:260
+msgid "Select Dates"
+msgstr "Select Dates"
+
+#: booking/templates/detail.html:373
+#: templates/components/reservation/reservation.html:320
+msgid "Adults"
+msgstr "Adults"
+
+#: booking/templates/detail.html:395
+#: templates/components/reservation/reservation.html:342
+msgid "Children"
+msgstr "Children"
+
+#: booking/templates/detail.html:419 booking/templates/detail.html:429
+#: templates/components/reservation/reservation.html:366
+#: templates/components/reservation/reservation.html:375
+#: templates/components/reservation/reservation.html:382
+msgid "years old"
+msgstr "years old"
+
+#: booking/templates/detail.html:438
+#: templates/components/reservation/reservation.html:392
+msgid ""
+"To find a place to stay that fits your entire group along with correct "
+"prices, we need to know how old your children will be at check-out"
+msgstr ""
+"To find a place to stay that fits your entire group along with correct "
+"prices, we need to know how old your children will be at check-out"
+
+#: booking/templates/detail.html:445
+#: templates/components/reservation/reservation.html:399
+msgid "Rooms"
+msgstr "Rooms"
+
+#: booking/templates/detail.html:466
+#: templates/components/reservation/reservation.html:420
+msgid "Done"
+msgstr "Done"
+
+#: booking/templates/detail.html:486
+#: templates/components/reservation/reservation.html:451
+msgid "Я ищу дом или апартаменты целиком"
+msgstr "I am looking for a whole house or apartment"
+
+#: booking/templates/detail.html:492
+#: templates/components/reservation/reservation.html:457
+msgid "Я путешествую по работе"
+msgstr "I travel for work"
+
+#: booking/templates/detail.html:554
+msgid "Photos"
+msgstr "Photos"
+
+#: booking/templates/detail.html:578
+msgid "Populyar axtarışlar"
+msgstr "Popular searches"
+
+#: booking/templates/detail.html:596 booking/templates/index.html:127
+msgid "Азербайджан — откройте для себя эту страну"
+msgstr "Azerbaijan - discover this country"
+
+#: booking/templates/detail.html:597
+msgid "В этих популярных местах вы точно найдете что-то для себя"
+msgstr ""
+"You will definitely find something for yourself in these popular places"
+
+#: booking/templates/detail.html:616 booking/templates/search_result.html:215
+msgid "км от центра"
+msgstr "km from the center"
+
+#: booking/templates/detail.html:626
+msgid "Жилье для осознанных путешествий"
+msgstr "Accommodation for conscious travel"
+
+#: booking/templates/index.html:65
+msgid "Спецпредложения"
+msgstr "Special offers"
+
+#: booking/templates/index.html:66 booking/templates/index.html:100
+msgid "Акции, скидки и специальные предложения для вас."
+msgstr "Promotions, discounts and special offers for you."
+
+#: booking/templates/index.html:99
+msgid "спец предложения"
+msgstr "Special offers"
+
+#: booking/templates/index.html:128
+msgid "В этих популярных местах вы точно найдете что-то для себя."
+msgstr ""
+"You will definitely find something for yourself in these popular places."
+
+#: booking/templates/index.html:142 booking/templates/index.html:272
+msgid "вариантов размещения"
+msgstr "accommodation options"
+
+#: booking/templates/index.html:208
+msgid "Поиск по типу размещения"
+msgstr "Search by type of accommodation"
+
+#: booking/templates/index.html:237
+msgid "Quick and easy trip planner"
+msgstr "Quick and easy trip planner"
+
+#: booking/templates/index.html:238
+msgid "Pick a vibe and explore the top destinations in Azerbaijan"
+msgstr "Pick a vibe and explore the top destinations in Azerbaijan"
+
+#: booking/templates/index.html:291
+msgid "Выберите уникальное жилье"
+msgstr "Choose a unique accommodation"
+
+#: booking/templates/index.html:292
+msgid "У нас есть всё: от замков и вилл до плавучих отелей и иглу"
+msgstr ""
+"We have everything from castles and villas to floating hotels and igloos"
+
+#: booking/templates/search_result.html:50
+msgid "Filter"
+msgstr "Filter"
+
+#: booking/templates/search_result.html:55
+msgid "Popular Filters"
+msgstr "Popular Filters"
+
+#: booking/templates/search_result.html:75
+msgid "Property Rating"
+msgstr "Property Rating"
+
+#: booking/templates/search_result.html:93
+msgid "Fun Things To Do"
+msgstr "Fun Things To Do"
+
+#: booking/templates/search_result.html:113
+msgid "показать все фильтры"
+msgstr "show all filters"
+
+#: booking/templates/search_result.html:138
+msgid "Property Type"
+msgstr "Property Type"
+
+#: booking/templates/search_result.html:153
+msgid "Axtar"
+msgstr "Search"
+
+#: booking/templates/search_result.html:164
+msgid "найдено"
+msgstr "found"
+
+#: booking/templates/search_result.html:164
+msgid "вариантов"
+msgstr "options"
+
+#: booking/templates/search_result.html:168
+msgid "Сортировать"
+msgstr "Sort"
+
+#: booking/templates/search_result.html:169
+#: booking/templates/search_result.html:178
+msgid "Сначала дома и аппартаменты"
+msgstr "First houses and apartments"
+
+#: booking/templates/search_result.html:170
+#: booking/templates/search_result.html:179
+msgid "Оценка объекта по убыванию"
+msgstr "Object rating descending"
+
+#: booking/templates/search_result.html:171
+#: booking/templates/search_result.html:180
+msgid "Расстояние от центра города"
+msgstr "Distance from city center"
+
+#: booking/templates/search_result.html:172
+#: booking/templates/search_result.html:181
+msgid "Оценка + кол-во отзывов"
+msgstr "Rating + number of reviews"
+
+#: booking/templates/search_result.html:173
+#: booking/templates/search_result.html:177
+msgid "Наши рекомендации"
+msgstr "Our recommendations"
+
+#: booking/templates/search_result.html:224
+msgid "Sea Detail"
+msgstr "Sea Detail"
+
+#: booking/templates/search_result.html:243
+msgid "Previous"
+msgstr "Previous"
+
+#: booking/templates/search_result.html:263
+msgid "Next"
+msgstr "Next"
+
+#: main/settings.py:142 templates/components/header/header.html:55
+msgid "Azerbaijani"
+msgstr "Azerbaijani"
+
+#: main/settings.py:143
+msgid "Russian"
+msgstr "Russian"
+
+#: main/settings.py:144
+msgid "English"
+msgstr "English"
+
+#: templates/base.html:85
+msgid "Сэкономьте время и деньги"
+msgstr "Save time and money"
+
+#: templates/base.html:86
+msgid "Подпишитесь, и мы вышлем вам лучшие предложения"
+msgstr "Subscribe and we will send you the best offers"
+
+#: templates/base.html:90
+msgid "Ваш электронный адрес"
+msgstr "Your email address"
+
+#: templates/base.html:91
+msgid "Пожалуйста заполните поле."
+msgstr "Please fill in the field."
+
+#: templates/base.html:92
+msgid "Подписаться"
+msgstr "Subscribe"
+
+#: templates/base.html:107
+msgid "Copyright"
+msgstr "Copyright"
+
+#: templates/base.html:107
+msgid "Все права защищены"
+msgstr "All rights reserved"
+
+#: templates/components/header/header.html:47
+msgid "English(US)"
+msgstr "English(US)"
+
+#: templates/components/header/header.html:63
+msgid "Русский"
+msgstr "Russian"
+
+#: templates/components/header/header.html:100
+msgid "Eще"
+msgstr "More"
+
+#: templates/components/header/header.html:114
+msgid "Программа лояльности"
+msgstr "Loyalty program"
+
+#: templates/components/header/header.html:127
+#: templates/components/header/header.html:140
+msgid "Зарегистрировать свой объект"
+msgstr "Register your object"
+
+#: templates/components/header/header.html:146
+msgid "помощь и поддержка"
+msgstr "help and support"
+
+#: templates/components/header/header.html:158
+msgid "Служба поддержки"
+msgstr "Support"
+
+#: templates/components/header/header.html:171
+msgid "Разрешение споров"
+msgstr "Dispute Resolution"
+
+#: templates/components/header/header.html:177
+msgid "вдохновение"
+msgstr "inspiration"
+
+#: templates/components/header/header.html:189
+msgid "Сезонные и праздничные предложения"
+msgstr "Seasonal and Holiday Offers"
+
+#: templates/components/header/header.html:202
+msgid "Статьи о путешествиях"
+msgstr "Travel Articles"
+
+#: templates/components/header/header.html:208
+msgid "Настройки и юридическая помощь"
+msgstr "Settings and legal assistance"
+
+#: templates/components/header/header.html:220
+msgid "О нашем сайте"
+msgstr "About our site"
+
+#: templates/components/header/header.html:233
+msgid "Вакансии"
+msgstr "Jobs"
+
+#: templates/components/header/header.html:246
+msgid "Юридическая информация"
+msgstr "Legal information"
+
+#: templates/components/header/header.html:259
+msgid "Правила и условия"
+msgstr "Terms & Conditions"
+
+#: templates/components/header/header.html:272
+msgid "Пресс-центр"
+msgstr "Press center"
+
+#: templates/components/reservation/reservation.html:84
+msgid "Check-in Date - Check-out Date"
+msgstr "Check-in Date - Check-out Date"

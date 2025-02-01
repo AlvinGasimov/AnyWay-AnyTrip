@@ -1,0 +1,187 @@
+.w-25 {
+    width: 25%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.custom-btn {
+    background: #0a58ca !important;
+}
+
+.custom-btn:hover{
+    background: #0071c2 !important;
+}
+
+.border-gray {
+    border-color: gray;
+}
+
+.fs-13 {
+    font-size: 13px;
+}
+
+
+
+/*---- Responsive ----*/
+
+@media (min-width: 320px) {
+ /* details */
+
+ .heart-box {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+    
+}
+
+@media (min-width: 576px) {
+    /* details */
+
+  .heart-box {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+   
+}
+
+@media (min-width: 768px) {
+    /* details */
+
+  .heart-box {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+    
+  /* Filter */
+  .w35 {
+    width: 55%;
+  }
+}
+
+@media (min-width: 992px) {
+  /* details */
+
+  .heart-box {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+    
+}
+
+.details-img-container {
+    width: 200px;
+    height: 200px;
+}
+
+.description-text p{
+    font-size: 14px;
+    margin: 0;
+}
+.details-container {
+    padding: 10px;
+}
+
+@media (min-width: 1024px) {
+   
+    /* Details Container */
+
+    .details-container {
+        padding: 10px;
+    }
+
+    .details-img-container {
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .heart-box {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+    }
+
+    .description-container {
+        margin-left: 15px;
+    }
+
+    .map-info {
+        font-size: 13px;
+    }
+
+    .map-info p{
+        font-size: 13px;
+    }
+
+    .description-text {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .quality-control-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #0f2d86;
+        color: #fff;
+        margin-top: 2px;
+        margin-right: 2px;
+        margin-left: 8px;
+    }
+
+    .details-filters {
+        border-radius: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /* Title on Details */
+    .btn-lightblue {
+        border-radius: 10px;
+        border-color: #0071c2;
+        background: #fff;
+        color: #0071c2;
+    }
+
+    .btn-lightblue:hover {
+        color: #0071c2;
+        background: rgb(185, 226, 251);
+    }
+
+    /* Filters */
+
+    .label-text-center {
+        display: flex;
+        align-items: center;
+    }
+
+    .w35 {
+        width: 35%;
+    }
+
+    /* details */
+
+    .heart-box {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+    }
+
+    
+}
+.footer-links p { 
+    color: white
+}
