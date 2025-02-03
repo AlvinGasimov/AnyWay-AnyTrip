@@ -7,6 +7,7 @@ from .filters import AnnouncementFilter
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import City, PropertyCategory, TravelCategory, \
     Announcement, SpecialOffer, Subscribe, PopularFilter, Service, \
@@ -129,13 +130,20 @@ def room_detail(request, pk):
                 )
         
                 subject = "Sifarişiniz uğurla qəbul edildi"
-                message = f"Siz {room.hotel.title} otelində {room.room_name} otağını {check_in_date.strftime('%d-%m-%Y')} tarixindən {check_out_date.strftime('%d-%m-%Y')} tarixinə qədər bron etmisiniz. Ödəniləcək məbləğ: {total_amount} ₼."
+                message = (
+                    f"Siz {room.hotel.title} otelində {room.room_name} otağını "
+                    f"{check_in_date.strftime('%d-%m-%Y')} tarixindən {check_out_date.strftime('%d-%m-%Y')} "
+                    f"tarixinə qədər bron etmisiniz. Ödəniləcək məbləğ: {total_amount} ₼."
+                )
                 from_email = settings.DEFAULT_FROM_EMAIL
                 recipient_list = [email]
-                send_mail(subject, message, from_email, recipient_list)
+
+                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+                return JsonResponse({"status": "success", "message": "Sifarişiniz uğurla yaradıldı və təsdiq e-poçtu göndərildi."})
                 
             except Exception as e:
-                pass
+                print("Xeta bas verdi", e)
         
     context = {
         "room": room,
